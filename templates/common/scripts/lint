@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+#
+# Perform linting on repository source code.
+#
+# The script should perform any automated linting necessary against the repository source code
+# to ensure it is formatted correctly and of the highest quality.
+#
+# Common Repository Interface:
+# $ make lint
+#
+# Standalone Interface:
+# $ scripts/lint
+
+set -e
+
+# Run linter against the repository scripts directory (if one exists).
+SCRIPTS="$(dirname "$0")"
+if test -d "${SCRIPTS}"; then
+    shellcheck scripts/*
+fi
+
+# Run linter against the repository Dockerfile (if one exists).
+DOCKERFILE="${PWD}/Dockerfile"
+if test -f "${DOCKERFILE}"; then
+    hadolint "${DOCKERFILE}"
+fi

@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := help
 
+.PHONY: lint
+lint:  ## Run linters on repository source code
+	@scripts/lint
+
 .PHONY: release-patch
 release-patch: scripts-release-patch  ## Release package with next patch version, e.g. 0.0.2 -> 0.0.3
 

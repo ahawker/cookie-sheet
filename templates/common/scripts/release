@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+#
+# Perform a package release.
+#
+# A release consists of bumping the package version (patch, minor, or major), creating a git
+# tag with the new version and pushing the changes to the configured remote repository.
+#
+# The CI/CD pipeline should trigger off the newly tagged version in the repository and kick off
+# the deployment process for this package using the commit corresponding to the new version.
+#
+# Common Repository Interface:
+# $ make release-patch
+# $ make release-minor
+# $ make release-major
+#
+# Standalone Interface:
+# $ scripts/release patch
+# $ scripts/release minor
+# $ scripts/release major
+
+set -e
+
+bumpversion "${1}" && git push && git push --tags

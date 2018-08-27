@@ -1,0 +1,5 @@
+# Add strings on each line to be passed as "--tag" values to the `docker build` command.
+#
+# Example:
+#
+# ahawker/cookie-sheet:1.2.3

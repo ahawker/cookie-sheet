@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+#
+# Build a container image from the package.
+#
+# The default implementation here uses `docker build` but could be refactored
+# to use any OCI-compatible build tools.
+#
+# This weakly depends on the `docker` directory within the repository for defining
+# custom args, labels, and tags.
+
+set -e
+
+DOCKER_DIR="${PWD}/docker"
+test -d "${DOCKER_DIR}" || echo "WARN: ${DOCKER_DIR} does not exist"
+
+DOCKERFILE="${DOCKER_DIR}/Dockerfile"
+test -f "${DOCKERFILE}" || echo "WARN: Dockerfile does not exist"
+
+BUILD_ARGS_FILE="${DOCKER_DIR}/build-args"
+test -f "${BUILD_ARGS_FILE}" || echo "WARN: Docker 'build-args' file does not exist"
+
+BUILD_LABELS_FILE="${DOCKER_DIR}/build-labels"
+test -f "${BUILD_LABELS_FILE}" || echo "WARN: Docker 'build-labels' file does not exist"
+
+BUILD_TAGS_FILE="${DOCKER_DIR}/build-tags"
+test -f "${BUILD_TAGS_FILE}" || echo "WARN: Docker 'build-tags' file does not exist"
+
+# Read in the args, labels, and tags files.
+BUILD_ARGS=($(grep -hv '^#' ${BUILD_ARGS_FILE} 2>/dev/null | xargs))
+BUILD_LABELS=($(grep -hv '^#' ${BUILD_LABELS_FILE} 2>/dev/null | xargs))
+BUILD_TAGS=($(grep -hv '^#' ${BUILD_TAGS_FILE} 2>/dev/null | xargs))
+
+# Convert the args, labels, and tags arrays into the `docker build` CLI args.
+DOCKER_ARGS="${BUILD_ARGS[@]/#/--build-arg }"
+DOCKER_LABELS="${BUILD_LABELS[@]/#/--label }"
+DOCKER_TAGS="${BUILD_TAGS[@]/#/--tag }"
+
+docker build \
+    --rm \
+    --force-rm \
+    --cache-from "{{ cookiecutter.project_slug_dasherize }}:latest" \
+    --file "${DOCKERFILE}" \
+    ${DOCKER_ARGS} \
+    ${DOCKER_LABELS} \
+    ${DOCKER_TAGS} \
+    .

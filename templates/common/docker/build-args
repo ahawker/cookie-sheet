@@ -1,0 +1,6 @@
+# Add key/value pairs on each line to be passed as "--build-arg" values to the `docker build` command.
+#
+# Example:
+#
+# TAG=latest
+# EMAIL=user@domain.com

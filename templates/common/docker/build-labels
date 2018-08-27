@@ -1,0 +1,6 @@
+# Add key/value pairs on each line to be passed as "--label" values to the `docker build` command.
+#
+# Example:
+#
+# image.tag=latest
+# image.maintainer=user@domain.com

@@ -1,7 +1,20 @@
 .DEFAULT_GOAL := help
 
+.PHONY: image-build
+image-build: scripts-image-build  ## Build container image from the package
+
+.PHONY: image-clean
+image-clean: scripts-image-clean  ## Clean old container images from local machine
+
+.PHONY: image-deploy
+image-deploy: scripts-image-release  ## Push container image built from the package to a remote image repository
+
+.PHONY: scripts-image-%
+scripts-image-%:
+	@scripts/image-$*
+
 .PHONY: lint
-lint:  ## Run linters on repository source code
+lint:  ## Run linters on package source code
 	@scripts/lint
 
 .PHONY: release-patch

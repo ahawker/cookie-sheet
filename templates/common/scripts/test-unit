@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+#
+# Run package unit tests.
+#
+# Common Repository Interface:
+# $ make test-unit
+# $ TEST=com.foo.bar#testbaz test-unit
+#
+# Standalone Interface:
+# $ scripts/test-unit
+# $ scripts/test-unit com.foo.bar#testbaz
+#
+# Args:
+#
+# $1 - Optional "test" to run; method or class.
+
+set -e
+
+exit 0

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+#
+# Run package interface tests.
+#
+# Common Repository Interface:
+# $ make test-interface
+# $ TEST=com.foo.bar#testbaz test-interface
+#
+# Standalone Interface:
+# $ scripts/test-interface
+# $ scripts/test-interface com.foo.bar#testbaz
+#
+# Args:
+#
+# $1 - Optional "test" to run; method or class.
+
+set -e
+
+exit 0

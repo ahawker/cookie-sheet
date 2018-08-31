@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+#
+# Run package integration tests.
+#
+# Common Repository Interface:
+# $ make test-integration
+# $ TEST=com.foo.bar#testbaz test-integration
+#
+# Standalone Interface:
+# $ scripts/test-integration
+# $ scripts/test-integration com.foo.bar#testbaz
+#
+# Args:
+#
+# $1 - Optional "test" to run; method or class.
+
+set -e
+
+exit 0

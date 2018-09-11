@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+#
+# Perform a package clean.
+#
+# Remove temporary/transient fields created from development efforts.
+
+set -e
+
+exit 0

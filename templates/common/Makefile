@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := help
 
+.PHONY: clean
+clean:  ## Clean temporary/transient package files
+	@scripts/clean
+
 .PHONY: image-build
 image-build: scripts-image-build  ## Build container image from the package
 

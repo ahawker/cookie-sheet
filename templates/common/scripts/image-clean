@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+#
+# Build a container image from the package.
+#
+# The default implementation here uses `docker build` but could be refactored
+# to use any OCI-compatible build tools.
+#
+# This weakly depends on the `docker` directory within the repository for defining
+# custom args, labels, and tags.
+
+set -e
+
+TIMESTAMP=$(date -u +%s)
+LABEL_PREFIX="${DOCKERFILES_LABEL_PREFIX?:'DOCKERFILES_LABEL_PREFIX' must be set}"
+
+docker system prune \
+    --all \
+    --force \
+    --filter "label=${LABEL_PREFIX}.image=${IMAGE}" \
+    --filter "until=${TIMESTAMP}"

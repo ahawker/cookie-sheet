@@ -3,3 +3,5 @@
 # Example:
 #
 # ahawker/cookie-sheet:1.2.3
+
+{{ cookiecutter.docker_repo }}/{{ cookiecutter.docker_image }}:latest

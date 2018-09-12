@@ -41,7 +41,7 @@ DOCKER_LABELS="${BUILD_LABELS[@]/#/--label }"
 DOCKER_TAGS="${BUILD_TAGS[@]/#/--tag }"
 
 docker build \
-    --cache-from "{{ cookiecutter.project_slug_dasherize }}:latest" \
+    --cache-from "{{ cookiecutter.docker_repo }}/{{ cookiecutter.docker_image }}:latest" \
     --file "${DOCKERFILE}" \
     ${DOCKER_OPTIONS} \
     ${DOCKER_ARGS} \

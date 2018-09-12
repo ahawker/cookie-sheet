@@ -16,6 +16,9 @@ test -d "${DOCKER_DIR}" || echo "WARN: ${DOCKER_DIR} does not exist"
 DOCKERFILE="${DOCKER_DIR}/Dockerfile"
 test -f "${DOCKERFILE}" || echo "WARN: Dockerfile does not exist"
 
+BUILD_OPTIONS_FILE="${DOCKER_DIR}/build-options"
+test -f "${BUILD_OPTIONS_FILE}" || echo "WARN: Docker 'build-options' file does not exist"
+
 BUILD_ARGS_FILE="${DOCKER_DIR}/build-args"
 test -f "${BUILD_ARGS_FILE}" || echo "WARN: Docker 'build-args' file does not exist"
 
@@ -27,19 +30,20 @@ test -f "${BUILD_TAGS_FILE}" || echo "WARN: Docker 'build-tags' file does not ex
 
 # Read in the args, labels, and tags files.
 BUILD_ARGS=($(grep -hv '^#' ${BUILD_ARGS_FILE} 2>/dev/null | xargs))
+BUILD_OPTIONS=($(grep -hv '^#' ${BUILD_OPTIONS_FILE} 2>/dev/null | xargs))
 BUILD_LABELS=($(grep -hv '^#' ${BUILD_LABELS_FILE} 2>/dev/null | xargs))
 BUILD_TAGS=($(grep -hv '^#' ${BUILD_TAGS_FILE} 2>/dev/null | xargs))
 
 # Convert the args, labels, and tags arrays into the `docker build` CLI args.
+DOCKER_OPTIONS="${BUILD_OPTIONS[@]/#/ }"
 DOCKER_ARGS="${BUILD_ARGS[@]/#/--build-arg }"
 DOCKER_LABELS="${BUILD_LABELS[@]/#/--label }"
 DOCKER_TAGS="${BUILD_TAGS[@]/#/--tag }"
 
 docker build \
-    --rm \
-    --force-rm \
     --cache-from "{{ cookiecutter.project_slug_dasherize }}:latest" \
     --file "${DOCKERFILE}" \
+    ${DOCKER_OPTIONS} \
     ${DOCKER_ARGS} \
     ${DOCKER_LABELS} \
     ${DOCKER_TAGS} \

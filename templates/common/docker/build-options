@@ -1,0 +1,8 @@
+# Add options on each line to be passed to the `docker build` command.
+#
+# Note: --file and --cache-from are passed automatically.
+#
+# Example:
+#
+# --rm
+# --force-rm

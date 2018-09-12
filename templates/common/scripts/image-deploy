@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+#
+# Deploy the container image built from the package.
+#
+# The default implementation here uses `docker push` but could be refactored
+# to use any OCI-compatible build tools.
+#
+# This depends on the `docker` directory within the repository for defining
+# a tags file.
+
+set -e
+
+DOCKER_DIR="${PWD}/docker"
+test -d "${DOCKER_DIR}" || echo "WARN: ${DOCKER_DIR} does not exist"
+
+BUILD_TAGS_FILE="${DOCKER_DIR}/build-tags"
+test -f "${BUILD_TAGS_FILE}" || echo "WARN: Docker 'build-tags' file does not exist"
+
+BUILD_TAGS=($(grep -hv '^#' ${BUILD_TAGS_FILE} 2>/dev/null | xargs))
+
+for tag in ${BUILD_TAGS} ; do docker push $tag ; done

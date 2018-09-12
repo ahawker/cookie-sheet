@@ -11,7 +11,7 @@ image-build: scripts-image-build  ## Build container image from the package
 image-clean: scripts-image-clean  ## Clean old container images from local machine
 
 .PHONY: image-deploy
-image-deploy: scripts-image-release  ## Push container image built from the package to a remote image repository
+image-deploy: scripts-image-deploy  ## Push container image built from the package to a remote image repository
 
 .PHONY: scripts-image-%
 scripts-image-%:

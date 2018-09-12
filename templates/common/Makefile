@@ -4,6 +4,10 @@
 clean:  ## Clean temporary/transient package files
 	@scripts/clean
 
+.PHONY: console
+console:  ## Run a console/shell for the package
+	@scripts/console
+
 .PHONY: image-build
 image-build: scripts-image-build  ## Build container image from the package
 

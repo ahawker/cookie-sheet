@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+#
+# Run a console/shell for the package.
+
+set -e
+
+exit 0

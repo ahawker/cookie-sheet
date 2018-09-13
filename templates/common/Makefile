@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY: clean
-clean:  ## Clean temporary/transient package files
+clean: image-clean  ## Clean temporary/transient package files
 	@scripts/clean
 
 .PHONY: console

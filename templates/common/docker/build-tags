@@ -4,4 +4,5 @@
 #
 # ahawker/cookie-sheet:1.2.3
 
-{{ cookiecutter.docker_repo }}/{{ cookiecutter.docker_image }}:latest
+{{ cookiecutter.image_repo }}/{{ cookiecutter.image_name }}:{{ cookiecutter.version }}
+{{ cookiecutter.image_repo }}/{{ cookiecutter.image_name }}:latest

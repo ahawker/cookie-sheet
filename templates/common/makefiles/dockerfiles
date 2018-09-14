@@ -1,0 +1,61 @@
+# makefiles/dockerfiles
+#
+# Makefile partial for dockerfiles related functionality.
+
+# Validate local 'dockerfiles' directory exists.
+DOCKERFILES := $(PWD)/dockerfiles
+ifeq ($(strip $(wildcard $(DOCKERFILES))),)
+$(error "Missing 'dockerfiles' directory in repository")
+endif
+
+# Validate local 'dockerfiles/global' file exists.
+DOCKERFILES_GLOBAL := $(DOCKERFILES)/global
+ifeq ($(strip $(wildcard $(DOCKERFILES_GLOBAL))),)
+$(error "Missing 'dockerfiles/global' file in repository")
+endif
+
+# Include 'dockerfiles/global' file into environment.
+include $(DOCKERFILES_GLOBAL)
+export $(shell sed 's/=.*//' $(DOCKERFILES_GLOBAL))
+
+# Validate required values from 'dockerfiles/global' have been properly set.
+ifndef DOCKERFILES_ENV_IMAGE_REPO
+$(error "Missing required variable 'DOCKERFILES_ENV_IMAGE_REPO'; check 'dockerfiles/global')
+endif
+ifndef DOCKERFILES_ENV_IMAGE_NAME
+$(error "Missing required variable 'DOCKERFILES_ENV_IMAGE_NAME'; check 'dockerfiles/global')
+endif
+ifndef DOCKERFILES_ENV_IMAGE_TAG
+$(error "Missing required variable 'DOCKERFILES_ENV_IMAGE_TAG'; check 'dockerfiles/global')
+endif
+
+# Create 'dockerfiles/env' file if local version does not exist.
+DOCKERFILES_ENV := $(DOCKERFILES)/env
+ifeq ($(strip $(wildcard $(DOCKERFILES_ENV))),)
+$(info Creating $(DOCKERFILES_ENV)...)
+$(shell docker run --rm -it $(DOCKERFILES_ENV_IMAGE_REPO)/$(DOCKERFILES_ENV_IMAGE_NAME):$(DOCKERFILES_ENV_IMAGE_TAG) > $(DOCKERFILES_ENV))
+endif
+
+# Include 'dockerfiles/env' file into environment.
+include $(DOCKERFILES_ENV)
+export $(shell sed 's/=.*//' $(DOCKERFILES_ENV))
+
+# Validate required values from 'dockerfiles/env' have been properly set.
+ifndef DOCKERFILES_BRANCH
+$(error "Missing required variable 'DOCKERFILES_BRANCH'; check 'dockerfiles/env')
+endif
+ifndef DOCKERFILES_BUILD_TS
+$(error "Missing required variable 'DOCKERFILES_BUILD_TS'; check 'dockerfiles/env')
+endif
+ifndef DOCKERFILES_LABEL_PREFIX
+$(error "Missing required variable 'DOCKERFILES_LABEL_PREFIX'; check 'dockerfiles/env')
+endif
+ifndef DOCKERFILES_BUILD_ID
+$(error "Missing required variable 'DOCKERFILES_BUILD_ID'; check 'dockerfiles/env')
+endif
+ifndef DOCKERFILES_TAG
+$(error "Missing required variable 'DOCKERFILES_TAG'; check 'dockerfiles/env')
+endif
+ifndef DOCKERFILES_COMMIT
+$(error "Missing required variable 'DOCKERFILES_COMMIT'; check 'dockerfiles/env')
+endif

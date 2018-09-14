@@ -1,0 +1,7 @@
+# dockerfiles/global
+#
+# Contains values that specify which "dockerfiles-env" image used to set the context.
+
+DOCKERFILES_ENV_IMAGE_REPO := ahawker
+DOCKERFILES_ENV_IMAGE_NAME := dockerfiles-env
+DOCKERFILES_ENV_IMAGE_TAG := latest

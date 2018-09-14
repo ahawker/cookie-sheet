@@ -1,5 +1,11 @@
 .DEFAULT_GOAL := help
 
+# Include all of the Makefile partials into the current context.
+PARTIALS := $(PWD)/makefiles
+ifneq ($(strip $(wildcard $(PARTIALS))),)
+include $(PARTIALS)/*
+endif
+
 .PHONY: clean
 clean: image-clean  ## Clean temporary/transient package files
 	@scripts/clean

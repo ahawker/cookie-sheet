@@ -6,6 +6,10 @@ ifneq ($(strip $(wildcard $(PARTIALS))),)
 include $(PARTIALS)/*
 endif
 
+.PHONY: changelog
+changelog:  ## Generate changelog from the package/repository contents
+	@scripts/changelog
+
 .PHONY: clean
 clean: image-clean  ## Clean temporary/transient package files
 	@scripts/clean

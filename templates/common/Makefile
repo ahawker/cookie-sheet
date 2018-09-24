@@ -10,6 +10,16 @@ endif
 changelog:  ## Generate changelog from the package/repository contents
 	@scripts/changelog
 
+.PHONY: check-liveness
+check-liveness: scripts-check-liveness  ## Perform liveness check against the package
+
+.PHONY: check-readiness
+check-readiness: scripts-check-readiness  ## Perform readiness check against the package
+
+.PHONY: scripts-check-%
+scripts-check-%:
+	@scripts/check-$*
+
 .PHONY: clean
 clean: image-clean  ## Clean temporary/transient package files
 	@scripts/clean

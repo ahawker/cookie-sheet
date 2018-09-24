@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+#
+# Perform a readiness check against the package.
+#
+# A readiness check is used to indicate if the package is ready to be used as part
+# of a larger system, e.g. webserver ready to take traffic.
+
+set -e
+
+exit 0

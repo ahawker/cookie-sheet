@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+#
+# Perform a liveness check against the package.
+#
+# A liveness check is used to simply indicate if the package is running.
+
+set -e
+
+exit 0

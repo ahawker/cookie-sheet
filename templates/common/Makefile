@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := usage
 
 # Include all of the Makefile partials into the current context.
 PARTIALS := $(PWD)/makefiles
@@ -27,6 +27,8 @@ clean: image-clean  ## Clean temporary/transient package files
 .PHONY: console
 console:  ## Run a console/shell for the package
 	@scripts/console
+
+help: usage
 
 .PHONY: image-build
 image-build: scripts-image-build  ## Build container image from the package
@@ -78,6 +80,6 @@ test-interface: scripts-test-interface  ## Run package interface (API, GUI) test
 scripts-test-%:
 	@scripts/test-$* $(TEST)
 
-.PHONY: help
-help: ## Print Makefile usage.
+.PHONY: usage
+usage: ## Print Makefile usage
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)

@@ -47,14 +47,14 @@ scripts-image-%:
 lint:  ## Run linters on package source code
 	@scripts/lint
 
-.PHONY: release-patch
-release-patch: scripts-release-patch  ## Release package with next patch version, e.g. 0.0.2 -> 0.0.3
+.PHONY: release-major
+release-major: scripts-release-major  ## Release package with next major version, e.g. 2.1.1 -> 3.1.1
 
 .PHONY: release-minor
 release-minor: scripts-release-minor  ## Release package with next minor version, e.g. 0.2.1 -> 0.3.1
 
-.PHONY: release-major
-release-major: scripts-release-major  ## Release package with next major version, e.g. 2.1.1 -> 3.1.1
+.PHONY: release-patch
+release-patch: scripts-release-patch  ## Release package with next patch version, e.g. 0.0.2 -> 0.0.3
 
 .PHONY: scripts-release-%
 scripts-release-%:
@@ -67,14 +67,14 @@ run:  ## Run the package main entrypoint
 .PHONY: test
 test: test-unit test-integration test-interface  ## Run all package tests
 
-.PHONY: test-unit
-test-unit: scripts-test-unit  ## Run package unit tests
-
 .PHONY: test-integration
 test-integration: scripts-test-integration  ## Run package integration tests
 
 .PHONY: test-interface
 test-interface: scripts-test-interface  ## Run package interface (API, GUI) tests
+
+.PHONY: test-unit
+test-unit: scripts-test-unit  ## Run package unit tests
 
 .PHONY: scripts-test-%
 scripts-test-%:

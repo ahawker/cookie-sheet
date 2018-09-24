@@ -58,6 +58,10 @@ release-major: scripts-release-major  ## Release package with next major version
 scripts-release-%:
 	@scripts/release $*
 
+.PHONY: run
+run:  ## Run the package main entrypoint
+	@scripts/run
+
 .PHONY: test
 test: test-unit test-integration test-interface  ## Run all package tests
 

@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# Run the package main entrypoint, e.g. run the web server or execute
+# the script.
+
+set -e
+
+exit 0

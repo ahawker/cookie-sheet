@@ -1,0 +1,1 @@
+../../common/hooks/pre_gen_project.py

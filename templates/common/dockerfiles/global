@@ -2,6 +2,6 @@
 #
 # Contains values that specify which "dockerfiles-env" image used to set the context.
 
-DOCKERFILES_ENV_IMAGE_REPO := ahawker
-DOCKERFILES_ENV_IMAGE_NAME := dockerfiles-env
-DOCKERFILES_ENV_IMAGE_TAG := latest
+DOCKERFILES_ENV_IMAGE_REPO := {{ cookiecutter.dockerfiles_env_image_repo }}
+DOCKERFILES_ENV_IMAGE_NAME := {{ cookiecutter.dockerfiles_env_image_name }}
+DOCKERFILES_ENV_IMAGE_TAG := {{ cookiecutter.dockerfiles_env_image_tag }}

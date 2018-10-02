@@ -11,8 +11,8 @@
   "project_short_description": null,
   "image_repo": null,
   "image_name": "{{ cookiecutter.project_slug_dash }}",
-  "dockerfiles_env_image_repo": null,
-  "dockerfiles_env_image_name": null,
-  "dockerfiles_env_image_tag": null,
+  "dockerfiles_env_image_repo": "ahawker",
+  "dockerfiles_env_image_name": "dockerfiles-env",
+  "dockerfiles_env_image_tag": "latest",
   "version": "0.0.1"
 }

@@ -14,5 +14,6 @@
   "dockerfiles_env_image_repo": "ahawker",
   "dockerfiles_env_image_name": "dockerfiles-env",
   "dockerfiles_env_image_tag": "latest",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "feature_travis_ci": ["on", "off"]
 }

@@ -1,0 +1,47 @@
+# .common/partials/travisci
+#
+# Makefile partial for Travis CI related functionality.
+
+{% if cookiecutter.feature_travis_ci == 'on' -%}
+ifeq ($(CI), true)
+.PHONY: travis-before-install
+travis-before-install: script-travis-before-install  ## Run package script for Travis CI 'before_install' step
+
+.PHONY: travis-install
+travis-install: script-travis-install  ## Run package script for Travis CI 'install' step
+
+.PHONY: travis-before-script
+travis-before-script: script-travis-before-script  ## Run package script for Travis CI 'before_script' step
+
+.PHONY: travis-script
+travis-script: script-travis-script  ## Run package script for Travis CI 'script' step
+
+.PHONY: travis-after-script
+travis-after-script: script-travis-after-script  ## Run package script for Travis CI 'after_script' step
+
+.PHONY: travis-before-cache
+travis-before-cache: script-travis-before-cache  ## Run package script for Travis CI 'before_cache' step
+
+.PHONY: travis-before-cache
+travis-before-cache: script-travis-before-cache  ## Run package script for Travis CI 'before_cache' step
+
+.PHONY: travis-after-success
+travis-after-success: script-travis-after-success  ## Run package script for Travis CI 'after_success' step
+
+.PHONY: travis-after-failure
+travis-after-failure: script-travis-after-failure  ## Run package script for Travis CI 'after_failure' step
+
+.PHONY: travis-before-deploy
+travis-before-deploy: script-travis-before-deploy  ## Run package script for Travis CI 'before_deploy' step
+
+.PHONY: travis-deploy
+travis-deploy: script-travis-deploy  ## Run package script for Travis CI 'deploy' step
+
+.PHONY: travis-after-deploy
+travis-after-deploy: script-travis-after-deploy  ## Run package script for Travis CI 'after_deploy' step
+
+.PHONY: script-travis-%
+script-travis-%:
+	@([[ -f scripts/travis-$* ]] && scripts/travis-$*) || (echo "WARN: 'scripts/travis-$*' not found" && true)
+endif
+{%- endif %}

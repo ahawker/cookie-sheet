@@ -1,0 +1,16 @@
+# common/partials/testing
+#
+# Makefile partial for test related functionality.
+
+TEST_SCRIPTS := $(sort $(wildcard scripts/test-*))
+
+.PHONY: test
+test: $(TEST_SCRIPTS)  ## Run all package tests
+
+.PHONY: test-%
+test-%: scripts/test-%  ## Run tests defined in the scripts/test-% script
+
+.PHONY: $(TEST_SCRIPTS)
+$(TEST_SCRIPTS):
+	@echo "Running '$@' tests..."
+	@$@ $(TEST)

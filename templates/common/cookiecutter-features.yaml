@@ -1,0 +1,42 @@
+features:
+- name: docker
+  enabled: {{ cookiecutter.docker_feature_flag | lower }}
+  paths:
+  - src: features/docker
+    dst: .cri/docker
+  - src: features/docker/Makefile
+    dst: .cri/makefiles/docker
+- name: dockerfiles
+  enabled: {{ cookiecutter.dockerfiles_feature_flag | lower }}
+  paths:
+  - src: feature/dockerfiles
+    dst: .cri/dockerfiles
+  - src: features/dockerfiles/Makefile
+    dst: .cri/makefiles/dockerfiles
+- name: jenkins
+  enabled: {{ cookiecutter.jenkins_feature_flag | lower }}
+  paths:
+  - src: feature/jenkins
+    dst: .cri/jenkins
+  - src: feature/jenkins/Makefile
+    dst: .cri/makefiles/jenkins
+  symlinks:
+  - src: feature/jenkins/Jenkinsfile
+    dst: Jenkinsfile
+- name: kubernetes
+  enabled: {{ cookiecutter.kubernetes_feature_flag | lower }}
+  paths:
+  - src: feature/kubernetes
+    dst: .cri/kubernetes
+  - src: feature/kubernetes/Makefile
+    dst: .cri/makefiles/kubernetes
+- name: travis-ci
+  enabled: {{ cookiecutter.travis_ci_feature_flag | lower }}
+  paths:
+  - src: feature/travis-ci
+    dst: .cri/travis-ci
+  - src: feature/travis-ci/Makefile
+    dst: .cri/makefiles/travis-ci
+  symlinks:
+  - src: feature/travis-ci/.travis.yml
+    dst: .travis.yl

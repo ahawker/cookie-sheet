@@ -1,0 +1,4 @@
+# makefiles/docker
+#
+# Makefile partial for docker related functionality.
+DOCKER_RUN = echo docker run --rm -it $(1)

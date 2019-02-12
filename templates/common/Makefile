@@ -6,6 +6,10 @@ ifneq ($(strip $(wildcard $(PARTIALS))),)
 include $(PARTIALS)/*
 endif
 
+.PHONY: extensions/%
+extensions/%:  ## LOL
+	echo hawker
+
 .PHONY: changelog
 changelog:  ## Generate changelog from the package/repository contents
 	@scripts/changelog
@@ -66,4 +70,4 @@ run:  ## Run the package main entrypoint
 
 .PHONY: usage
 usage: ## Print Makefile usage
-	@awk 'BEGIN {FS = ":.*?## "} /^[%a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+	@awk 'BEGIN {FS = ":.*?## "} /^[\/%a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort

@@ -1,0 +1,3 @@
+echo "TEST HAWKER CALLED LOL"
+
+exit 1

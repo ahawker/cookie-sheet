@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ cookiecutter.project_slug_dash }}
+  labels:
+    app: {{ cookiecutter.project_slug_dash }}
+spec:
+  replicas: {{ cookiecutter.kubernetes_replicas }}
+  revisionHistoryLimit: {{ cookiecutter.kubernetes_revision_history_limit }}
+  template:
+    metadata:
+      labels:
+        app: {{ cookiecutter.project_slug_dash }}
+    spec:
+      containers:
+      - name: {{ cookiecutter.project_slug_dash }}
+        image: {{ cookiecutter.image_repo }}/{{ cookiecutter.image_name }}:latest
+        imagePullPolicy: {{ cookiecutter.kubernetes_image_pull_policy }}
+        env:
+{%- for name, value in cookiecutter.kubernetes_env.items() %}
+          - name: {{ name }}
+            value: {{ value }}
+{%- endfor %}
+{%- for name, value in cookiecutter.kubernetes_secrets.items() %}
+          - name: {{ name }}
+            valueFrom:
+              secretKeyRef:
+                
+{%- endfor %}
+          - name: SERVER_HOST
+            value: 0.0.0.0
+          - name: SERVER_PORT
+            value: "8080"
+          - name: ENVIRONMENT
+            value: production
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 30
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "750m"
+            memory: "1Gi"

@@ -1,0 +1,75 @@
+#eval docker run --rm -it ahawker/dockerfiles-env:master-a37eedb-1534200037-2308232342
+
+
+#grep -hv '^#' ${BUILD_ARGS_FILE} 2>/dev/null | xargs
+
+# TODO
+#
+
+
+# ifeq ($(strip $(wildcard $(DOCKERFILES))),)
+# @docker run --rm -it ahawker/dockerfiles-env:master-a37eedb-1534200037-2308232342) > $(DOCKERFILES)
+
+# endif
+
+
+# export $(shell sed 's/=.*//' DOCKERFILES)
+
+
+#DOCKERFILES_ENV_IMAGE_REPO = {{ cookiecutter.dockerfiles_env_image_repo }}
+#DOCKERFILES_ENV_IMAGE_NAME = {{ cookiecutter.dockerfiles_env_image_name }}
+#DOCKERFILES_ENV_IMAGE_TAG ={{ cookiecutter.dockerfiles_env_image_tag }}
+
+
+
+
+	#echo $@
+	#echo $*
+	#echo $@
+	#echo $*
+	#@scripts/test-$*
+
+#.PHONY: $(FILES)
+
+# .PHONY: scripts/test-*
+# scripts/test-*:
+# 	echo "+++++++++++++++++++++++++++++"
+# 	#echo $%
+# 	echo $*
+# 	echo $@
+# 	echo $^
+# 	echo $<
+# 	echo $<
+# 	echo $?
+# 	echo $+
+# 	echo $|
+# 	#echo $$*
+# 	#echo $$($$@)
+# 	@$@$* $(TEST)
+
+features:
+- name: docker
+  enabled: {{ cookiecutter.docker_feature_flag | lower }}
+  paths:
+  - docker
+  - scripts/image-build
+  - scripts/image-clean
+  - scripts/image-deploy
+- name: dockerfiles
+  enabled: {{ cookiecutter.dockerfiles_feature_flag | lower }}
+  paths:
+  - dockerfiles
+  - makefiles/dockerfiles
+- name: jenkins
+  enabled: {{ cookiecutter.jenkins_feature_flag | lower }}
+  paths:
+  - Jenkinsfile
+- name: kubernetes
+  enabled: {{ cookiecutter.kubernetes_feature_flag | lower }}
+  paths:
+  - kubernetes
+- name: travis-ci
+  enabled: {{ cookiecutter.travis_ci_feature_flag | lower }}
+  paths:
+  - .travisci.yml
+  - makefiles/travisci

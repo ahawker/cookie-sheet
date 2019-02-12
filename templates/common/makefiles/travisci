@@ -2,7 +2,6 @@
 #
 # Makefile partial for Travis CI related functionality.
 
-{% if cookiecutter.feature_travis_ci == 'on' -%}
 ifeq ($(CI), true)
 .PHONY: travis-before-install
 travis-before-install: script-travis-before-install  ## Run package script for Travis CI 'before_install' step
@@ -44,4 +43,3 @@ travis-after-deploy: script-travis-after-deploy  ## Run package script for Travi
 script-travis-%:
 	@([[ -f scripts/travis-$* ]] && scripts/travis-$*) || (echo "WARN: 'scripts/travis-$*' not found" && true)
 endif
-{%- endif %}
